@@ -1,9 +1,10 @@
+import Course from "./Course"
+import "./CourseList.css"
+
 const CourseList = ({courses}) => (
-  <div>
+  <div className="course-list">
     {Object.values(courses).map((courseinfo) => (
-      <p>
-        {courseinfo.term} CS {courseinfo.number}: {courseinfo.title}
-      </p>
+      <Course key={courseinfo.number} course={courseinfo} />
     ))}
   </div>
 )
