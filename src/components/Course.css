@@ -1,4 +1,4 @@
-.card-body{
+.course-body{
   border: 1px solid #D3D3D3;
   border-radius: 16px;
   padding: 8px 8px;
@@ -9,6 +9,6 @@
   max-width: 175px;
 }
 
-.card-bottom{
+.course-bottom{
   border-top: 1px solid #D3D3D3;
 }
