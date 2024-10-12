@@ -1,5 +1,10 @@
-.course-list {
+.course {
   display: grid;
   gap: 8px;
   grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+}
+
+.course.selected {
+  background-color:lemonchiffon;
+  color: green;
 }
