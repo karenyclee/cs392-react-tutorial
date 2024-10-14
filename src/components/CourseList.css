@@ -8,3 +8,9 @@
   background-color:lemonchiffon;
   color: green;
 }
+
+.top-right-button {
+  position: absolute;
+  right: 20px;
+  top: 70px;
+}
