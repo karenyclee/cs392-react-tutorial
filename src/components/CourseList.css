@@ -14,3 +14,8 @@
   right: 20px;
   top: 70px;
 }
+
+.course.conflict {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
