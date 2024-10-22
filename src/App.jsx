@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useJsonQuery } from './utilities/fetch';
 import { BrowserRouter, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import EditForm from './components/EditForm';
+import { useDbData } from "./utilities/firebase";
 
 const EditLoader = ({courses}) => {
   const {id} = useParams();
@@ -13,11 +14,12 @@ const EditLoader = ({courses}) => {
 };
 
 const Main = () => {
-  const [data, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
 
-  if (error) return <h1>Error loading user data: {`${error}`}</h1>;
-  if (isLoading) return <h1>Loading user data...</h1>;
-  if (!data) return <h1>No user data found</h1>;
+  const [data, error] = useDbData('/cs-courses');
+
+  if (error) return <h1>Error loading data: {error.toString()}</h1>;
+  if (data === undefined) return <h1>Loading data...</h1>;
+  if (!data) return <h1>No data found</h1>;
 
   return (
       <BrowserRouter>
