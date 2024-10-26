@@ -10,7 +10,7 @@ import { useDbData } from "./utilities/firebase";
 const EditLoader = ({courses}) => {
   const {id} = useParams();
   const course = courses[id];
-  return <EditForm course={course}/>;
+  return <EditForm course={course} id={id}/>;
 };
 
 const Main = () => {
