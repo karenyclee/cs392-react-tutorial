@@ -27,14 +27,10 @@ const EditForm = ({course, id}) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setState((previous) => ({...previous, [name]: value}
-    ))
+    setState((previous) => ({ ...previous, [name]: value }));
     setNoChange(false);
-    if (name === "title") {
-      setValidationErrors((previous) => ({ ...previous, title: validateTitle(value) }));
-    } else if (name === "meets") {
-      setValidationErrors((previous) => ({ ...previous, meets: validateMeets(value) }));
-    }
+    const errors = formValidation({ ...state, [name]: value });
+    setValidationErrors(errors);
   };
 
   const handleSubmit = async (event) => {

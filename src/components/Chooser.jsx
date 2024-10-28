@@ -4,7 +4,7 @@ import CourseList from "./CourseList";
 import Modal from './Modal';
 
 // course page
-const Chooser = ({courses}) => {
+const Chooser = ({courses, user}) => {
   const [choice, setChoice] = useState("Fall");
   const [selected, setSelected] = useState([]);
   const [open, setOpen] = useState(false);
@@ -27,7 +27,7 @@ const Chooser = ({courses}) => {
       </div>
 
       <SelectTerm selection={choice} setSelection={setChoice}/>
-      <CourseList courses={courses} term={choice} selected={selected} toggleSelected={toggleSelected}/>
+      <CourseList courses={courses} term={choice} selected={selected} toggleSelected={toggleSelected} user={user}/>
       <Modal children={selected.map(key => courses[key])} open={open} close={closeModal}></Modal>
     </>
   );

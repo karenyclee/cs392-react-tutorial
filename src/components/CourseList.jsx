@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './CourseList.css';
 import { checkConflicts } from '../utilities/conflicts';
 
-const CourseList = ({ courses, term, selected, toggleSelected }) => {
+const CourseList = ({ courses, term, selected, toggleSelected, user }) => {
   // Filter courses by term
   const filtered = Object.entries(courses).filter(
     ([id, course]) => course.term === term
@@ -35,9 +35,11 @@ const CourseList = ({ courses, term, selected, toggleSelected }) => {
                 <p>{courseinfo.meets}</p>
               </div>
               <p className="card-text">
-                <Link to={`/edit/${id}`}>
-                  <button className="edit-button">Edit</button>
-                </Link>
+                {user && (
+                  <Link to={`/edit/${id}`}>
+                    <button className="edit-button">Edit</button>
+                  </Link>
+                )}
               </p>
             </div>
           </div>

@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useJsonQuery } from './utilities/fetch';
 import { BrowserRouter, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import EditForm from './components/EditForm';
-import { useDbData } from "./utilities/firebase";
+import { useAuthState, useDbData } from "./utilities/firebase";
 
 const EditLoader = ({courses}) => {
   const {id} = useParams();
@@ -14,7 +14,7 @@ const EditLoader = ({courses}) => {
 };
 
 const Main = () => {
-
+  const [user] = useAuthState();
   const [data, error] = useDbData('/cs-courses');
 
   if (error) return <h1>Error loading data: {error.toString()}</h1>;
@@ -26,8 +26,8 @@ const Main = () => {
         <>
           <Banner title={data.title}></Banner>
           <Routes>
-            <Route path="/" element={<Chooser courses={data.courses}/>} />
-            <Route path="/edit/:id" element={<EditLoader courses={data.courses} />} />
+            <Route path="/" element={<Chooser courses={data.courses} user={user}/>} />
+            <Route path="/edit/:id" element={<EditLoader courses={data.courses}/>} />
           </Routes>
         </>
       </BrowserRouter>
