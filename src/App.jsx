@@ -6,6 +6,7 @@ import { useJsonQuery } from './utilities/fetch';
 import { BrowserRouter, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import EditForm from './components/EditForm';
 import { useAuthState, useDbData } from "./utilities/firebase";
+import { useProfile } from "./utilities/profile";
 
 const EditLoader = ({courses}) => {
   const {id} = useParams();
@@ -14,9 +15,9 @@ const EditLoader = ({courses}) => {
 };
 
 const Main = () => {
-  const [user] = useAuthState();
+  const [profile, profileLoading, profileError] = useProfile();
   const [data, error] = useDbData('/cs-courses');
-
+  
   if (error) return <h1>Error loading data: {error.toString()}</h1>;
   if (data === undefined) return <h1>Loading data...</h1>;
   if (!data) return <h1>No data found</h1>;
@@ -26,7 +27,7 @@ const Main = () => {
         <>
           <Banner title={data.title}></Banner>
           <Routes>
-            <Route path="/" element={<Chooser courses={data.courses} user={user}/>} />
+            <Route path="/" element={<Chooser courses={data.courses} profile={profile}/>} />
             <Route path="/edit/:id" element={<EditLoader courses={data.courses}/>} />
           </Routes>
         </>
